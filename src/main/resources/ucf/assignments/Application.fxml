@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.Controller">
+   <children>
+      <TableView fx:id="tableView" layoutY="34.0" prefHeight="366.0" prefWidth="600.0">
+        <columns>
+          <TableColumn prefWidth="139.0" text="Serial Number" />
+          <TableColumn prefWidth="346.0" text="Name" />
+            <TableColumn minWidth="0.0" prefWidth="114.0" text="Value" />
+        </columns>
+      </TableView>
+      <SplitMenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="File">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#saveTSVClicked" text="Save as .tsv" />
+          <MenuItem mnemonicParsing="false" onAction="#saveHTMLClicked" text="Save as .html" />
+            <MenuItem mnemonicParsing="false" onAction="#loadTSVClicked" text="Load .tsv" />
+            <MenuItem mnemonicParsing="false" onAction="#loadHTMLClicked" text="Load .html" />
+        </items>
+      </SplitMenuButton>
+      <SplitMenuButton layoutX="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Item Actions">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#addItemClicked" text="Add Item" />
+          <MenuItem mnemonicParsing="false" onAction="#removeItemClicked" text="Remove Item" />
+            <MenuItem mnemonicParsing="false" onAction="#editItemClicked" text="Edit Item" />
+        </items>
+      </SplitMenuButton>
+      <SplitMenuButton layoutX="272.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Search...">
+         <items>
+            <MenuItem mnemonicParsing="false" onAction="#searchByNameClicked" text="by Name" />
+            <MenuItem mnemonicParsing="false" onAction="#searchBySerialClicked" text="by Serial No." />
+         </items>
+      </SplitMenuButton>
+   </children>
+</AnchorPane>
