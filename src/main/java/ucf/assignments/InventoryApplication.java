@@ -17,7 +17,9 @@ public class InventoryApplication extends Application {
     @Override
     public void start(Stage primaryStage) {
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("/ucf/assignments/Application.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("/ucf/assignments/Application.fxml")); // load fxml file
+
+            // set the scene and show
             Scene scene = new Scene(root);
             primaryStage.setScene(scene);
             primaryStage.setTitle("Inventory Tracker");

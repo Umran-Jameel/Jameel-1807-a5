@@ -11,7 +11,7 @@
         <VBox prefHeight="36.0" prefWidth="402.0">
             <children>
                 <TextField fx:id="textField" />
-                <Button mnemonicParsing="false" onAction="#searchBySerialClicked" prefHeight="26.0" prefWidth="432.0" text="Search" />
+                <Button mnemonicParsing="false" fx:id="bySerialButton" onAction="#searchBySerialClicked" prefHeight="26.0" prefWidth="432.0" text="Search" />
             </children>
         </VBox>
     </children>

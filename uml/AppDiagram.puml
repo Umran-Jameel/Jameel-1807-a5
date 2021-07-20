@@ -1,0 +1,36 @@
+@startuml
+'https://plantuml.com/class-diagram
+class Controller {
+
+}
+
+
+class InventoryApplication {
+ + main(String[] args) : void
+ + start(Stage primaryStage) : void
+}
+
+class InventoryEditor {
+
+}
+
+class InventoryList {
+
+}
+
+class Item {
+
+}
+
+class Search {
+
+}
+
+
+javafx.Application <|-- InventoryApplication
+Controller -- InventoryApplication
+Controller *-- "uses"Search
+Controller *-- "uses"InventoryEditor
+Controller"1" --* "contains"InventoryList
+InventoryList "100..*"--* "contains" Item
+@enduml

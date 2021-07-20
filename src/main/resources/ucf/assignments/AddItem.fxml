@@ -42,6 +42,6 @@
             <TextField fx:id="textFieldValue" GridPane.columnIndex="1" GridPane.rowIndex="2" />
          </children>
       </GridPane>
-      <Button layoutX="146.0" layoutY="117.0" mnemonicParsing="false" onAction="#addItemClicked" text="Update" />
+      <Button layoutX="146.0" layoutY="117.0" mnemonicParsing="false" fx:id="addButton" onAction="#addItemCLicked" text="Add Item" />
    </children>
 </AnchorPane>
