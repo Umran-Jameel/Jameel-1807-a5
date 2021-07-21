@@ -13,6 +13,9 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class Controller {
+
+    static InventoryList inventoryList = new InventoryList();
+
     @FXML
     TableView tableView;
 
@@ -34,9 +37,11 @@ public class Controller {
     @FXML
     Button bySerialButton;
 
+    InventoryEditor inventoryEditor = new InventoryEditor();
 
-    InventoryList inventoryList = new InventoryList();
-    InventoryEditor inventoryEditor= new InventoryEditor();
+    public Controller() {
+
+    }
 
     public void saveTSVClicked(ActionEvent actionEvent) {
         // File chooser to get the file name and path from the user
@@ -44,6 +49,7 @@ public class Controller {
     }
 
     public void saveHTMLClicked(ActionEvent actionEvent) {
+
     }
 
     public void loadTSVClicked(ActionEvent actionEvent) {
@@ -65,6 +71,29 @@ public class Controller {
         primaryStage.show();
     }
 
+    public void addButtonCLicked(ActionEvent actionEvent) {
+        Stage stage = (Stage) addButton.getScene().getWindow(); // getting access to the stage via the button
+
+        String name = textFieldName.getText(); // get the item name stringfrom the textfield for the name
+        String serial = textFieldSerial.getText(); // get the serial number string from the textfield for the serial number
+        String value = textFieldValue.getText(); // get the value string from the textfield for the value
+
+        // if the user-provided name is not valid, let the user know
+        if (!inventoryEditor.isValidName(name)) {
+            stage.setTitle("Item name must be between 2 and 256 characters in length (inclusive)!");
+        }
+        else if (!inventoryEditor.isValidSerial(serial)) { // if the user-provided serial number is not valid, let the user know
+            stage.setTitle("Serial # must be in format XXXXXXXXXX (letters and/or digits)!");
+        }
+        else if (!inventoryEditor.isValidMoney(value)) { // if the user-provided value is not valid, let the user know
+            stage.setTitle("Value must represent a valid monetary value in US Dollars!");
+        }
+        else { // if everything is valid
+            stage.close(); // close the dialog for user input
+            inventoryEditor.addItem(inventoryList, name, serial, value); // add the new item to the list
+        }
+    }
+
     public void removeItemClicked(ActionEvent actionEvent) {
         // remove the selected item on the tableview
     }
@@ -79,14 +108,11 @@ public class Controller {
     }
 
     public void searchBySerialClicked(ActionEvent actionEvent) {
-        // load the search by serial fxml and show it
-        System.out.println(inventoryList.items.get(0).name);
-    }
 
-    public void addButtonCLicked(ActionEvent actionEvent) {
     }
 
     public void editButtonClicked(ActionEvent actionEvent) {
+
     }
 
     public void byNameButtonCLicked(ActionEvent actionEvent) {
