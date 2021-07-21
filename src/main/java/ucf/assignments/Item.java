@@ -3,7 +3,7 @@ package ucf.assignments;
 import java.math.BigDecimal;
 
 public class Item {
-    BigDecimal value;
+    String value;
     String serialNumber;
     String name;
 }

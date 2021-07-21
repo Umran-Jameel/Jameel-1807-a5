@@ -16,8 +16,27 @@ public class Controller {
     @FXML
     TableView tableView;
 
+    @FXML
+    Button addButton;
+    @FXML
+    Button editButton;
+    @FXML
+    TextField textFieldName;
+    @FXML
+    TextField textFieldSerial;
+    @FXML
+    TextField textFieldValue;
+
+    @FXML
+    TextField textField;
+    @FXML
+    Button byNameButton;
+    @FXML
+    Button bySerialButton;
+
+
     InventoryList inventoryList = new InventoryList();
-    InventoryEditor inventoryEditor = new InventoryEditor();
+    InventoryEditor inventoryEditor= new InventoryEditor();
 
     public void saveTSVClicked(ActionEvent actionEvent) {
         // File chooser to get the file name and path from the user
@@ -34,8 +53,16 @@ public class Controller {
     public void loadHTMLClicked(ActionEvent actionEvent) {
     }
 
-    public void addItemClicked(ActionEvent actionEvent) {
-        // Load the add item fxml and show the stage
+    public void addItemClicked(ActionEvent actionEvent) throws IOException {
+
+        Parent root = FXMLLoader.load(getClass().getResource("/ucf/assignments/AddItem.fxml")); // load fxml file to add item
+
+        // set the scene and show it
+        Scene scene = new Scene(root);
+        Stage primaryStage = new Stage();
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("Add Item");
+        primaryStage.show();
     }
 
     public void removeItemClicked(ActionEvent actionEvent) {
@@ -53,5 +80,18 @@ public class Controller {
 
     public void searchBySerialClicked(ActionEvent actionEvent) {
         // load the search by serial fxml and show it
+        System.out.println(inventoryList.items.get(0).name);
+    }
+
+    public void addButtonCLicked(ActionEvent actionEvent) {
+    }
+
+    public void editButtonClicked(ActionEvent actionEvent) {
+    }
+
+    public void byNameButtonCLicked(ActionEvent actionEvent) {
+    }
+
+    public void bySerialButtonClicked(ActionEvent actionEvent) {
     }
 }

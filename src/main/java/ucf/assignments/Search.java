@@ -6,14 +6,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 
 public class Search {
-    @FXML
-    TextField textField;
-    @FXML
-    Button byNameButton;
-    @FXML
-    Button bySerialButton;
 
-    public void searchByNameClicked(ActionEvent actionEvent) {
+    public void searchByName() {
         // get the stage/window from the button byNameButton
         // close the window
         // get the text from the textfield
@@ -21,7 +15,7 @@ public class Search {
         // highlight the row of that index in the inventory list
     }
 
-    public void searchBySerialClicked(ActionEvent actionEvent) {
+    public void searchBySerial() {
         // get the stage/window from the button bySerialButton
         // close the window
         // get the text from the textfield
