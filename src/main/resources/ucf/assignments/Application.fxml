@@ -19,7 +19,8 @@
       <SplitMenuButton layoutX="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Item Actions">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#addItemClicked" text="Add Item" />
-            <MenuItem mnemonicParsing="false" onAction="#editItemClicked" text="Edit/Delete Item" />
+            <MenuItem mnemonicParsing="false" onAction="#editItemClicked" text="Edit Selected Item" />
+            <MenuItem mnemonicParsing="false" onAction="#removeItemClicked" text="Remove Selected Item" />
         </items>
       </SplitMenuButton>
       <SplitMenuButton layoutX="272.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Search...">

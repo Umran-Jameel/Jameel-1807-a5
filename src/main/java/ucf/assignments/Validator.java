@@ -12,7 +12,7 @@ public class Validator {
         return true;
     }
 
-    public int isValidSerial(String serial, InventoryList inventoryList) {
+    public int isValidSerial(String serial, String current, InventoryList inventoryList) {
         // serial number should be 10 chars
         if (serial.length() != 10) {
             return 0;
@@ -29,6 +29,11 @@ public class Validator {
             }
         }
 
+        // this is for the edit item function, to ignore if the user is keeping the same serial number
+        if (serial.equals(current)) {
+            return 2;
+        }
+
         // if it is a duplicate serial number, it's invalid
         for (int i = 0; i < inventoryList.items.size(); i++) {
             if (serial.equals(inventoryList.items.get(i).serialNumber)) {
@@ -36,7 +41,7 @@ public class Validator {
             }
         }
 
-        return 2; // 2 means it's valid
+        return 3; // 3 means it's valid
     }
 
     public boolean isValidMoney(String money) {
