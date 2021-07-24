@@ -5,42 +5,22 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
+import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.util.Locale;
 
 public class Controller {
-
+    SceneMaker sceneMaker = new SceneMaker();
     static InventoryList inventoryList = new InventoryList();
-
-    @FXML
-    TableView tableView;
-
-    @FXML
-    Button addButton;
-    @FXML
-    Button editButton;
-    @FXML
-    TextField textFieldName;
-    @FXML
-    TextField textFieldSerial;
-    @FXML
-    TextField textFieldValue;
-
-    @FXML
-    TextField textField;
-    @FXML
-    Button byNameButton;
-    @FXML
-    Button bySerialButton;
-
     InventoryEditor inventoryEditor = new InventoryEditor();
 
-    public Controller() {
+    @FXML
+    ListView<String> listView = new ListView<String>();
 
+    public Controller() {
     }
 
     public void saveTSVClicked(ActionEvent actionEvent) {
@@ -59,65 +39,78 @@ public class Controller {
     public void loadHTMLClicked(ActionEvent actionEvent) {
     }
 
-    public void addItemClicked(ActionEvent actionEvent) throws IOException {
+    public void addItemClicked(ActionEvent actionEvent) {
+        // Elements of the add item stage
+        Button addButton = new Button("Add");
+        TextField textFieldName = new TextField();
+        TextField textFieldSerial = new TextField();
+        TextField textFieldValue = new TextField();
 
-        Parent root = FXMLLoader.load(getClass().getResource("/ucf/assignments/AddItem.fxml")); // load fxml file to add item
+        // prompt the user to enter the item name, serial number, and value
+        textFieldName.setPromptText("Item Name...");
+        textFieldSerial.setPromptText("Serial Number...");
+        textFieldValue.setPromptText("Value (USD)...");
 
-        // set the scene and show it
-        Scene scene = new Scene(root);
-        Stage primaryStage = new Stage();
-        primaryStage.setScene(scene);
-        primaryStage.setTitle("Add Item");
-        primaryStage.show();
-    }
+        // create the stage and add the elements to that stage
+        Stage addItemStage = sceneMaker.makeScene(600, 170, textFieldName, textFieldSerial, textFieldValue, addButton);
+        addItemStage.setTitle("Add Item");
+        addItemStage.show();
 
-    public void addButtonCLicked(ActionEvent actionEvent) {
-        Stage stage = (Stage) addButton.getScene().getWindow(); // getting access to the stage via the button
+        addButton.setOnAction(e -> {
+            // get the user input of the item's attributes
+            String name = textFieldName.getText();
+            String serial = textFieldSerial.getText();
+            String value = textFieldValue.getText();
 
-        String name = textFieldName.getText(); // get the item name stringfrom the textfield for the name
-        String serial = textFieldSerial.getText(); // get the serial number string from the textfield for the serial number
-        String value = textFieldValue.getText(); // get the value string from the textfield for the value
-
-        // if the user-provided name is not valid, let the user know
-        if (!inventoryEditor.isValidName(name)) {
-            stage.setTitle("Item name must be between 2 and 256 characters in length (inclusive)!");
-        }
-        else if (!inventoryEditor.isValidSerial(serial)) { // if the user-provided serial number is not valid, let the user know
-            stage.setTitle("Serial # must be in format XXXXXXXXXX (letters and/or digits)!");
-        }
-        else if (!inventoryEditor.isValidMoney(value)) { // if the user-provided value is not valid, let the user know
-            stage.setTitle("Value must represent a valid monetary value in US Dollars!");
-        }
-        else { // if everything is valid
-            stage.close(); // close the dialog for user input
-            inventoryEditor.addItem(inventoryList, name, serial, value); // add the new item to the list
-        }
-    }
-
-    public void removeItemClicked(ActionEvent actionEvent) {
-        // remove the selected item on the tableview
+            if (!inventoryEditor.validator.isValidName(name)) { // if the item's name is not valid, let the user know and don't add
+                addItemStage.setTitle("Item name must be between 2 and 256 characters in length (inclusive)!");
+            }
+            else if (inventoryEditor.validator.isValidSerial(serial.toUpperCase(), Controller.inventoryList) == 0) { // if the user-provided serial number is not valid, let the user know
+                addItemStage.setTitle("Serial # must be in format XXXXXXXXXX (letters and/or digits)!");
+            }
+            else if (inventoryEditor.validator.isValidSerial(serial.toUpperCase(), Controller.inventoryList) == 1) { // if the serial number already exists
+                addItemStage.setTitle("There is already an item with that serial number!");
+            }
+            else if (!inventoryEditor.validator.isValidMoney(value)) { // if the user-provided value is not valid, let the user know
+                addItemStage.setTitle("Value must represent a valid monetary value in US Dollars!");
+            }
+            else { // if everything is valid, add to the list and close the window
+                inventoryEditor.addItem(Controller.inventoryList, name, serial.toUpperCase(), value); // add the new item to the list
+                addItemStage.close();
+                updateTable();
+            }
+        });
     }
 
     public void editItemClicked(ActionEvent actionEvent) {
-        // load the edit item fxml page and show the stage
-        // put the current info on the dialog box
     }
+
 
     public void searchByNameClicked(ActionEvent actionEvent) {
         // load the search by name fxml and show it
     }
 
     public void searchBySerialClicked(ActionEvent actionEvent) {
-
     }
 
-    public void editButtonClicked(ActionEvent actionEvent) {
 
+    public void sortByValueClicked(ActionEvent actionEvent) {
     }
 
-    public void byNameButtonCLicked(ActionEvent actionEvent) {
+    public void sortBySerialClicked(ActionEvent actionEvent) {
     }
 
-    public void bySerialButtonClicked(ActionEvent actionEvent) {
+    public void sortByNameClicked(ActionEvent actionEvent) {
     }
+
+    public void updateTable() {
+        listView.getItems().clear(); // clear the list view to add again
+
+        // add all the elements to the listview
+        for (int i = 0; i < Controller.inventoryList.items.size(); i++) {
+            listView.getItems().add(Controller.inventoryList.items.get(i).outputLine);
+        }
+    }
+
+
 }

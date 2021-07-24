@@ -1,20 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
-<?import javafx.scene.control.TableColumn?>
-<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.Controller">
    <children>
-      <TableView fx:id="tableView" layoutY="34.0" prefHeight="366.0" prefWidth="600.0">
-        <columns>
-          <TableColumn prefWidth="139.0" text="Serial Number" />
-          <TableColumn prefWidth="346.0" text="Name" />
-            <TableColumn minWidth="0.0" prefWidth="114.0" text="Value" />
-        </columns>
-      </TableView>
       <SplitMenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="File">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#saveTSVClicked" text="Save as .tsv" />
@@ -26,8 +19,7 @@
       <SplitMenuButton layoutX="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Item Actions">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#addItemClicked" text="Add Item" />
-          <MenuItem mnemonicParsing="false" onAction="#removeItemClicked" text="Remove Item" />
-            <MenuItem mnemonicParsing="false" onAction="#editItemClicked" text="Edit Item" />
+            <MenuItem mnemonicParsing="false" onAction="#editItemClicked" text="Edit/Delete Item" />
         </items>
       </SplitMenuButton>
       <SplitMenuButton layoutX="272.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Search...">
@@ -35,6 +27,15 @@
             <MenuItem mnemonicParsing="false" onAction="#searchByNameClicked" text="by Name" />
             <MenuItem mnemonicParsing="false" onAction="#searchBySerialClicked" text="by Serial No." />
          </items>
+      </SplitMenuButton>
+      <ListView fx:id="listView" layoutY="61.0" prefHeight="340.0" prefWidth="600.0" />
+      <Text layoutX="12.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value                                Serial Number                             Name" wrappingWidth="575.21630859375" />
+      <SplitMenuButton layoutX="408.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Sort">
+        <items>
+          <MenuItem mnemonicParsing="false" onAction="#sortByValueClicked" text="by Value" />
+          <MenuItem mnemonicParsing="false" onAction="#sortBySerialClicked" text="by Serial Number" />
+            <MenuItem mnemonicParsing="false" onAction="#sortByNameClicked" text="by Name" />
+        </items>
       </SplitMenuButton>
    </children>
 </AnchorPane>
