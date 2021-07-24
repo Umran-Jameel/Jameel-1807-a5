@@ -1,10 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.ListView?>
 <?import javafx.scene.control.MenuItem?>
 <?import javafx.scene.control.SplitMenuButton?>
+<?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="ucf.assignments.Controller">
    <children>
@@ -29,8 +28,6 @@
             <MenuItem mnemonicParsing="false" onAction="#searchBySerialClicked" text="by Serial No." />
          </items>
       </SplitMenuButton>
-      <ListView fx:id="listView" layoutY="61.0" prefHeight="340.0" prefWidth="600.0" />
-      <Text layoutX="12.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Value                                Serial Number                             Name" wrappingWidth="575.21630859375" />
       <SplitMenuButton layoutX="408.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Sort">
         <items>
           <MenuItem mnemonicParsing="false" onAction="#sortByValueClicked" text="by Value" />
@@ -38,5 +35,6 @@
             <MenuItem mnemonicParsing="false" onAction="#sortByNameClicked" text="by Name" />
         </items>
       </SplitMenuButton>
+      <TableView fx:id="tableView" layoutY="32.0" prefHeight="368.0" prefWidth="600.0" />
    </children>
 </AnchorPane>

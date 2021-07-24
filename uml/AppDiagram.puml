@@ -34,6 +34,10 @@ class SceneMaker {
 
 }
 
+class Sorter {
+
+}
+
 javafx.Application <|-- InventoryApplication
 Controller -- InventoryApplication
 Controller *-- "uses"Search
@@ -42,4 +46,5 @@ Controller *-- "uses"SceneMaker
 Controller"1" --* "contains"InventoryList
 InventoryList "100..*"--* "contains" Item
 InventoryEditor *-- "uses" Validator
+Controller *-- "uses"Sorter
 @enduml
