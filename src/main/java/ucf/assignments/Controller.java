@@ -14,6 +14,7 @@ public class Controller {
     InventoryEditor inventoryEditor = new InventoryEditor();
     SceneMaker sceneMaker = new SceneMaker();
     Sorter sorter = new Sorter();
+    Searcher searcher = new Searcher();
 
     @FXML
     TableView tableView;
@@ -130,6 +131,54 @@ public class Controller {
         updateTable(); // update the table
     }
 
+    public void searchByNameClicked(ActionEvent actionEvent) {
+        // elements of the search by name dialogue
+        Button search = new Button("Search");
+        TextField textFieldByName = new TextField();
+        textFieldByName.setPromptText("Item Name...");
+
+        // create the stage
+        Stage searchByNameStage = sceneMaker.makeScene(500, 100, textFieldByName, search);
+        searchByNameStage.setTitle("Search By Name");
+        searchByNameStage.show();
+
+        search.setOnAction(e -> {
+            int index = searcher.searchByName(Controller.inventoryList, textFieldByName.getText()); // get index of the item being searched
+            // if the item doesn't exist, let the user know
+            if (index == -1) {
+                searchByNameStage.setTitle("That item does not exist!");
+            }
+            else {
+                searchByNameStage.close();
+                tableView.getSelectionModel().select(index); // highlight the index of the item
+            }
+        });
+    }
+
+    public void searchBySerialClicked(ActionEvent actionEvent) {
+        // elements of the search by name dialogue
+        Button search = new Button("Search");
+        TextField textFieldByName = new TextField();
+        textFieldByName.setPromptText("Serial Number...");
+
+        // create the stage
+        Stage searchBySerialStage = sceneMaker.makeScene(500, 100, textFieldByName, search);
+        searchBySerialStage.setTitle("Search By Serial Number");
+        searchBySerialStage.show();
+
+        search.setOnAction(e -> {
+            int index = searcher.searchBySerial(Controller.inventoryList, textFieldByName.getText()); // get index of the item being searched
+            // if the item doesn't exist, let the user know
+            if (index == -1) {
+                searchBySerialStage.setTitle("There is no item with that serial number!");
+            }
+            else {
+                searchBySerialStage.close();
+                tableView.getSelectionModel().select(index); // highlight the index of the item
+            }
+        });
+    }
+
     public void saveTSVClicked(ActionEvent actionEvent) {
         // File chooser to get the file name and path from the user
         // Write the info into the tsv file using /t and save
@@ -143,16 +192,6 @@ public class Controller {
     }
 
     public void loadHTMLClicked(ActionEvent actionEvent) {
-    }
-
-
-
-
-    public void searchByNameClicked(ActionEvent actionEvent) {
-        // load the search by name fxml and show it
-    }
-
-    public void searchBySerialClicked(ActionEvent actionEvent) {
     }
 
     public void updateTable() {

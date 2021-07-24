@@ -17,9 +17,10 @@ public class SceneMaker {
         vBox.getChildren().addAll(elements);
         vBox.setAlignment(Pos.TOP_CENTER);
 
+        // set the scene
         Scene scene = new Scene(vBox, width, height);
         stage.setScene(scene);
 
-        return stage;
+        return stage; // return the stage for use
     }
 }
