@@ -38,11 +38,16 @@ class Sorter {
 
 }
 
+class SaveAndLoader {
+
+}
+
 javafx.Application <|-- InventoryApplication
 Controller -- InventoryApplication
 Controller *-- "uses"Search
 Controller *-- "uses"InventoryEditor
 Controller *-- "uses"SceneMaker
+Controller *-- "uses"SaveAndLoader
 Controller"1" --* "contains"InventoryList
 InventoryList "100..*"--* "contains" Item
 InventoryEditor *-- "uses" Validator

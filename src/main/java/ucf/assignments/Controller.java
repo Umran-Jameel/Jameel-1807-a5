@@ -6,7 +6,12 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 
 public class Controller {
@@ -15,6 +20,7 @@ public class Controller {
     SceneMaker sceneMaker = new SceneMaker();
     Sorter sorter = new Sorter();
     Searcher searcher = new Searcher();
+    SaveAndLoader saveAndLoader = new SaveAndLoader();
 
     @FXML
     TableView tableView;
@@ -179,19 +185,45 @@ public class Controller {
         });
     }
 
-    public void saveTSVClicked(ActionEvent actionEvent) {
-        // File chooser to get the file name and path from the user
-        // Write the info into the tsv file using /t and save
+    public void saveTSVClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage(); // new stage for the filechooser dialogue
+
+        // file chooser for getting the file name and directory from the user
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as TSV");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tab-Separated Value", "*.txt")); // TSV can be saved only in .txt format
+
+        File tsvFile = fileChooser.showSaveDialog(stage); // getting the file pointer
+        saveAndLoader.saveTSV(Controller.inventoryList, tsvFile); // save the contents of the inventory list to a tsv file
     }
 
-    public void saveHTMLClicked(ActionEvent actionEvent) {
+    public void saveHTMLClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage(); // new stage for the filechooser dialogue
+
+        // file chooser for getting the file name and directory from the user
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Save as HTML");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("HTML", "*.html")); // HTML saved in html format only
+
+        File htmlFile = fileChooser.showSaveDialog(stage); // getting the file pointer
+        saveAndLoader.saveHTML(Controller.inventoryList, htmlFile); // save the contents of the inventory list to an html file
     }
 
     public void loadTSVClicked(ActionEvent actionEvent) {
         // read all the info and put it into the array list
     }
 
-    public void loadHTMLClicked(ActionEvent actionEvent) {
+    public void loadHTMLClicked(ActionEvent actionEvent) throws IOException {
+        Stage stage = new Stage(); // stage for the filechooser dialogue
+
+        // file chooser for the user to provide the file
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load HTML file");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("HTML", "*.html"));
+        File htmlFile = fileChooser.showOpenDialog(stage);
+
+        saveAndLoader.loadHTML(Controller.inventoryList, htmlFile); // load the content on the html file
+        updateTable(); // update the table
     }
 
     public void updateTable() {

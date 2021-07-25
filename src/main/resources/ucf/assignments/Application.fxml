@@ -9,10 +9,10 @@
    <children>
       <SplitMenuButton mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="File">
         <items>
-          <MenuItem mnemonicParsing="false" onAction="#saveTSVClicked" text="Save as .tsv" />
-          <MenuItem mnemonicParsing="false" onAction="#saveHTMLClicked" text="Save as .html" />
-            <MenuItem mnemonicParsing="false" onAction="#loadTSVClicked" text="Load .tsv" />
-            <MenuItem mnemonicParsing="false" onAction="#loadHTMLClicked" text="Load .html" />
+          <MenuItem mnemonicParsing="false" onAction="#saveTSVClicked" text="Save as TSV" />
+          <MenuItem mnemonicParsing="false" onAction="#saveHTMLClicked" text="Save as HTML" />
+            <MenuItem mnemonicParsing="false" onAction="#loadTSVClicked" text="Load TSV" />
+            <MenuItem mnemonicParsing="false" onAction="#loadHTMLClicked" text="Load HTML" />
         </items>
       </SplitMenuButton>
       <SplitMenuButton layoutX="136.0" mnemonicParsing="false" prefHeight="31.0" prefWidth="136.0" text="Item Actions">
