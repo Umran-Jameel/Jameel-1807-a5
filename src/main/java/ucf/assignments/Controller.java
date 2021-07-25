@@ -209,8 +209,17 @@ public class Controller {
         saveAndLoader.saveHTML(Controller.inventoryList, htmlFile); // save the contents of the inventory list to an html file
     }
 
-    public void loadTSVClicked(ActionEvent actionEvent) {
-        // read all the info and put it into the array list
+    public void loadTSVClicked(ActionEvent actionEvent) throws FileNotFoundException {
+        Stage stage = new Stage(); // stage for the filechooser
+
+        // file chooser for the user to provide the file
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Load TSV file");
+        fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Tab-Separated Value", "*.txt"));
+        File tsvFile = fileChooser.showOpenDialog(stage);
+
+        saveAndLoader.loadTSV(Controller.inventoryList, tsvFile); // load the tsv file
+        updateTable();
     }
 
     public void loadHTMLClicked(ActionEvent actionEvent) throws IOException {

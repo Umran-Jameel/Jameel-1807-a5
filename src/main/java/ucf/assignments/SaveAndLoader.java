@@ -3,6 +3,7 @@ package ucf.assignments;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Locale;
+import java.util.Scanner;
 
 public class SaveAndLoader {
     public void saveTSV(InventoryList inventoryList, File tsvFile) throws IOException {
@@ -43,8 +44,19 @@ public class SaveAndLoader {
         fileWriter.close();
     }
 
-    public void loadTSV(InventoryList inventoryList, File tsvFile) {
+    public void loadTSV(InventoryList inventoryList, File tsvFile) throws FileNotFoundException {
+        Scanner read = new Scanner(tsvFile); // scanner to read the file
 
+        read.nextLine(); // skip the first line (table header)
+
+        while (read.hasNext()) {
+            String value = read.next().substring(1); // the value string comes with $, which is not stored in the item field
+            String serialNumber = read.next(); // next thing to read is serial number
+            String name = read.next(); // next thing to read is name
+
+            Item newItem = new Item(name, serialNumber, value); // create the new item
+            inventoryList.items.add(newItem); // add it to the list
+        }
     }
 
     // i parsed the html myself. Since we're loading html files previously saved by the application, this works
@@ -104,7 +116,7 @@ public class SaveAndLoader {
 
             fileInputStream.skip(43); // skip 43 chars to get to the next value
 
-            // if the char is not >, that means the items have ended
+            // if the next char is not >, that means the items have ended
             if ((char)fileInputStream.read() != '>') {
                 break;
             }
