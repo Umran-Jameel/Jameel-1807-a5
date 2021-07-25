@@ -1,0 +1,9 @@
+User guide to using the application:
+The application can store at least 100 inventory items, each with value in US Dollars, a unique serial number in the format XXXXXXXXXX (letters/digits), and a name between 2 and 256 characters (inclusive).
+To add an item, select the "Item Actions" dropdown on the top and click "Add Item". Type in the name of the item, the serial number, and the value and click add. The table will update.
+To remove an existing item from the list, select an item on the table. Then, click the "Item Actions" drop down and select "Remove Selected Item". The item will then be removed. 
+To edit the name, serial number, or value of an existing item, select an item on the table. Then, click the "Item Actions" drop down and select "Edit Selected Item". Edit the attributes of the item as you please and click "Update Item".
+To sort the items on the table by value, serial number, or by name, simply select the "Sort" dropdown, and select the method in which you wish to sort the items. Alternatively, you may click the table column header; doing so will sort the items in acsending/descending order.
+To search for an inventory item by serial number or by name, click the "Search..." dropdown and select how you would like to search. A dialogue will pop up, type the serial number/item. If the item exists, it will be selected on the table. 
+The application supports saving the inventory items to external storage as an HTML file or as a TSV (.txt) file. To save, click the "File" dropdown and select either "Save as HTML" or "Save as TSV". A dialogue will pop up for you to select the file direcotry and file name. Click save and the file will be saved.
+To load an HTML file or TSV file previously created by the application, click the "File" dropdown and select either "Load TSV" or "Load HTML". File expolorer will pop up, allowing you to choose the file directory from thecomputer's storage.
