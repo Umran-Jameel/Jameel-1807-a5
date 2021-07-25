@@ -1,8 +1,29 @@
 @startuml
 'https://plantuml.com/class-diagram
 class Controller {
+ {static} InventoryList inventoryList
+ InventoryEditor inventoryEditor
+ SceneMaker sceneMaker
+ Sorter sorter
+ Searcher searcher
+ SaveAndLoader saveAndLoader
+ TableView tableView;
 
-}
+ + Controller()
+ + addItemClicked(ActionEvent actionEvent) : void
+ + removeItemClicked(ActionEvent actionEvent) : void
+ + editItemClicked(ActionEvent actionEvent) : void
+ + sortByValueClicked(ActionEvent actionEvent) : void
+ + sortBySerialClicked(ActionEvent actionEvent) : void
+ + sortByNameClicked(ActionEvent actionEvent) : void
+ + searchByNameClicked(ActionEvent actionEvent) : void
+ + searchBySerialClicked(ActionEvent actionEvent) : void
+ + saveTSVClicked(ActionEvent actionEvent) : void
+ + saveHTMLClicked(ActionEvent actionEvent) : void
+ + loadTSVClicked(ActionEvent actionEvent) : void
+ + loadHTMLClicked(ActionEvent actionEvent) : void
+ + updateTable() : void
+ }
 
 
 class InventoryApplication {
@@ -11,35 +32,59 @@ class InventoryApplication {
 }
 
 class InventoryEditor {
+ + Validator validator
+
+ + addItem(InventoryList inventoryList, String name, String serial, String money) : void
+ + removeItem(InventoryList inventoryList, int index)
+ + editItem(InventoryList inventoryList, String name, String serial, String value, int index)
 
 }
 
 class InventoryList {
-
+ ArrayList<Item> items
 }
 
 class Item {
+ String name
+ String serialNumber
+ String value
+ String outputLine
 
+ + Item(String name, String serial, String value)
+ + getName() : String
+ + setName(String name) : void
+ + getSerialNumber() : String
+ + setSerialNumber(String serialNumber) : void
+ + getValue() : String
+ + setValue(String value) : void
 }
 
-class Search {
-
+class Searcher {
+ + searchByName(InventoryList inventoryList, String name) : int
+ + searchBySerial(InventoryList inventoryList, String serial) : int
 }
 
 class Validator {
-
+ + isValidName(String name) : boolean
+ + isValidSerial(String serial, String current, InventoryList inventoryList) : int
+ + isValidMoney(String money) : boolean
 }
 
 class SceneMaker {
-
+ + makeScene(int width, int height, Node... elements): Stage
 }
 
 class Sorter {
-
+ + sortByValue(InventoryList inventoryList) : void
+ + sortBySerialNumber(InventoryList inventoryList) : void
+ + sortByName(InventoryList inventoryList) : void
 }
 
 class SaveAndLoader {
-
++ saveTSV(InventoryList inventoryList, File tsvFile) : void
++ saveHTML(InventoryList inventoryList, File htmlFile) : void
++ loadTSV(InventoryList inventoryList, File tsvFile) : void
++ loadHTML(InventoryList inventoryList, File htmlFile) : void
 }
 
 javafx.Application <|-- InventoryApplication
@@ -48,6 +93,7 @@ Controller *-- "uses"Search
 Controller *-- "uses"InventoryEditor
 Controller *-- "uses"SceneMaker
 Controller *-- "uses"SaveAndLoader
+Controller *-- "uses"Searcher
 Controller"1" --* "contains"InventoryList
 InventoryList "100..*"--* "contains" Item
 InventoryEditor *-- "uses" Validator
